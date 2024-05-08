@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Vector3 playerPosition;
-    [SerializeField] float health;
-    [SerializeField] float stamina;
-    Transform player;
+    [SerializeField] PlayerData playerData;
+    PlayerManager player;
+
     private void Awake()
     {
-        player = FindObjectOfType<PlayerManager>().transform;
+        player = FindObjectOfType<PlayerManager>();
+        player.playerData = playerData;
     }
     private void Update()
     {
-        playerPosition = player.position;
+        playerData.Position = player.transform.position;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //! Save 
-            SaveManager.SavePlayerPrefs(playerPosition, health, stamina);
+            SaveManager.SavePlayerPrefs(playerData);
         }
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             //! Load
-            SaveManager.LoadPlayerPrefs(out playerPosition, out health,out stamina);
-            player.position = playerPosition;
+            SaveManager.LoadPlayerPrefs(ref playerData);
+            player.transform.position = playerData.Position;
         }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [HideInInspector] 
+    public PlayerData playerData;
     Vector3 playerMovement;
     void Update()
     {
@@ -11,7 +13,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement.z = Input.GetAxis("Vertical");
         playerMovement.y = 0f;
         playerMovement.Normalize();
-        
-        transform.position += playerMovement;
+
+        transform.Translate(playerMovement * Time.deltaTime * playerData.Speed);
     }
 }
