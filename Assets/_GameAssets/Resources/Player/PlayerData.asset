@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3237270c107d0b74183bae1ce8e126ac, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  Level: 1
+  ExperiencePoints: 0
   MaxHealth: 100
-  Health: 100
-  MaxStamina: 100
-  Stamina: 100
-  Speed: 31
-  Dimension: 1
-  Position: {x: -9.029973, y: 1, z: -12.364892}
+  Health: 0
+  MaxStamina: 50
+  Stamina: 0
+  Speed: 3
+  Damage: 12.5
+  Dimension: 0
+  Position: {x: 0, y: 0, z: 0}

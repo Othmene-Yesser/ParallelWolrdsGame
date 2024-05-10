@@ -6,12 +6,15 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("PlayerStats")]
-    public float MaxHealth;
+    public int Level = 1;
+    public float ExperiencePoints = 0;
+    public float MaxHealth = 100f;
     public float Health;
-    public float MaxStamina;
+    public float MaxStamina = 50f;
     public float Stamina;
-    public float Speed;
+    public float Speed = 3f;
+    public float Damage = 12.5f;
     [Header("Postion")]
-    public int Dimension;
+    public int Dimension = 0;
     public Vector3 Position;
 }
