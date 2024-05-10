@@ -9,22 +9,39 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<PlayerManager>();
-        
     }
-
-    private void Update()
+    private void Start()
     {
-        player.playerData.Position = player.transform.position;
-        if (Input.GetKeyDown(KeyCode.Space))
+        //! Load PlayerData On Start
+        if (player.playerData == null)
         {
-            //! Save 
+            player.playerData = new PlayerData();
             SaveManager.SavePlayerPrefs(player.playerData);
         }
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        else
         {
-            //! Load
             SaveManager.LoadPlayerPrefs(ref player.playerData);
             player.transform.position = player.playerData.Position;
         }
+    }
+    public void LoadPlayerData()
+    {
+        //! Load
+        if (player.playerData == null)
+        {
+            player.playerData = new PlayerData();
+        }
+        SaveManager.LoadPlayerPrefs(ref player.playerData);
+        player.transform.position = player.playerData.Position;
+    }
+    public void SavePlayerData()
+    {
+        //! Save 
+        if (player.playerData == null)
+        {
+            player.playerData = new PlayerData();
+        }
+        player.playerData.Position = player.transform.position;
+        SaveManager.SavePlayerPrefs(player.playerData);
     }
 }

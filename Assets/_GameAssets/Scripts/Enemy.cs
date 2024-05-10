@@ -26,16 +26,21 @@ public class Enemy : MonoBehaviour
             health = value;
         }
     }
-    private float health;
+
+    [SerializeField] private float health;
+    private float importance;
 
     Rigidbody rb;
 
     private void OnEnable()
     {
-        health = 100f;
+        health = 12.5f;
+        importance = Random.Range(1f, 4f);
     }
     private void Death()
     {
+        var playerManager = FindObjectOfType<PlayerManager>();
+        ExperienceManager.GainExperience(ref playerManager.playerData, importance);
         Destroy(this.gameObject);
     }
 }

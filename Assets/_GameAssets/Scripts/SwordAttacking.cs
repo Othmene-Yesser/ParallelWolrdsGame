@@ -29,3 +29,4 @@ public class SwordAttacking : MonoBehaviour
         enemyRigidbody.AddForce(direction * 110);
     }
 }
+

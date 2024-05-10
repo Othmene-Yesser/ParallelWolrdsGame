@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    
     public PlayerData playerData;
     [HideInInspector]
     public AnimatorManager animatorManager;
@@ -38,5 +39,9 @@ public class PlayerManager : MonoBehaviour
         isInteracting = animatorManager.animator.GetBool("IsInteracting");
         playerLocomotion.isJumping = animatorManager.animator.GetBool("IsJumping");
         animatorManager.animator.SetBool("IsGrounded", playerLocomotion.isGrounded);
+    }
+    public void DiscardPlayerData()
+    {
+        playerData = null;
     }
 }
