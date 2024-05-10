@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
     public float Health
@@ -26,6 +27,9 @@ public class Enemy : MonoBehaviour
         }
     }
     private float health;
+
+    Rigidbody rb;
+
     private void OnEnable()
     {
         health = 100f;

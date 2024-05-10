@@ -17,6 +17,15 @@ public class SwordAttacking : MonoBehaviour
             var enemy = other.GetComponent<Enemy>();
             playerManager.animatorManager.animator.SetBool("IsAttacking", false);
             enemy.Health -= playerManager.playerData.Damage;
+
+            ApplyKnockback(other.GetComponent<Rigidbody>(), other);
         }
+    }
+
+    private void ApplyKnockback(Rigidbody enemyRigidbody, Collider enemy)
+    {
+        var direction = enemy.transform.position - playerManager.transform.position;
+        direction.Normalize();
+        enemyRigidbody.AddForce(direction * 110);
     }
 }

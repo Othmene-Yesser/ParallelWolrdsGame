@@ -36,8 +36,6 @@ public class PlayerLocomotion : MonoBehaviour
 
     //-----------------------------------------------------
 
-    float timeSinceLastAttacked;
-
     private void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -46,11 +44,6 @@ public class PlayerLocomotion : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
     }
-    private void Start()
-    {
-        timeSinceLastAttacked = Time.time;
-    }
-
     public void HandleAllMovement()
     {
         HandleFallingAndLanding();
@@ -169,6 +162,7 @@ public class PlayerLocomotion : MonoBehaviour
     public void HandleAttacking()
     {
         animatorManager.animator.SetTrigger("Attacking");
+        
     }
 
     public void HandleJumping()
