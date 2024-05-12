@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class SaveManager
 {
+    static readonly string True = "true";
+    static readonly string False = "false";
     static readonly string PlayerPositionX = "PlayerPositionX";
     static readonly string PlayerPositionY = "PlayerPositionY";
     static readonly string PlayerPositionZ = "PlayerPositionZ";
@@ -13,9 +15,12 @@ public static class SaveManager
     static readonly string PlayerMaxStamina = "PlayerMaxStamina";
     static readonly string PlayerSpeed = "PlayerSpeed";
     static readonly string PlayerDimension = "PlayerDimension";
+    static readonly string BeatenBossInAgility = "AgilityBoss";
+    static readonly string BeatenBossInBizarre = "BizarreBoss";
 
     public static void SavePlayerPrefs(PlayerData playerData)
     {
+        
         PlayerPrefs.SetFloat(PlayerPositionX, playerData.Position.x);
         PlayerPrefs.SetFloat(PlayerPositionY, playerData.Position.y);
         PlayerPrefs.SetFloat(PlayerPositionZ, playerData.Position.z);
@@ -40,6 +45,22 @@ public static class SaveManager
         playerData.Speed = PlayerPrefs.GetFloat(PlayerSpeed);
         playerData.Dimension = PlayerPrefs.GetInt(PlayerDimension);
         Debug.Log("Loaded");
+    }
+    public static void CreateNewSave()
+    {
+        PlayerPrefs.SetString(BeatenBossInAgility, False);
+        PlayerPrefs.SetString(BeatenBossInBizarre, False);
+        PlayerPrefs.Save();
+    }
+    public static void BeatAgilityBoss()
+    {
+        PlayerPrefs.SetString(BeatenBossInAgility, True);
+        PlayerPrefs.Save();
+    }
+    public static void BeatBizarreBoss()
+    {
+        PlayerPrefs.SetString(BeatenBossInBizarre, True);
+        PlayerPrefs.Save();
     }
 }
 

@@ -10,25 +10,18 @@ public class GameManager : MonoBehaviour
     {
         player = FindObjectOfType<PlayerManager>();
     }
+
     private void Start()
     {
-        //! Load PlayerData On Start
-        if (player.playerData == null)
-        {
-            player.playerData = new PlayerData();
-            SaveManager.SavePlayerPrefs(player.playerData);
-        }
-        else
-        {
-            SaveManager.LoadPlayerPrefs(ref player.playerData);
-            player.transform.position = player.playerData.Position;
-        }
+        player.playerData = new PlayerData();
     }
+
     public void LoadPlayerData()
     {
         //! Load
         if (player.playerData == null)
         {
+            Debug.LogError("There was no save data");
             player.playerData = new PlayerData();
         }
         SaveManager.LoadPlayerPrefs(ref player.playerData);
