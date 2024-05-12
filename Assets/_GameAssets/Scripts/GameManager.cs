@@ -8,12 +8,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        SaveManager.CreateNewSave();
+        
         player = FindObjectOfType<PlayerManager>();
+        
     }
 
     private void Start()
     {
         player.playerData = new PlayerData();
+        SaveManager.LoadPlayerPrefs(ref player.playerData);
     }
 
     public void LoadPlayerData()
@@ -36,5 +40,10 @@ public class GameManager : MonoBehaviour
         }
         player.playerData.Position = player.transform.position;
         SaveManager.SavePlayerPrefs(player.playerData);
+    }
+    public void BeatBothBosses()
+    {
+        SaveManager.BeatBizarreBoss();
+        SaveManager.BeatAgilityBoss();
     }
 }

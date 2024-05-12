@@ -255,6 +255,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e811526-b9cf-4f6b-8dd6-55d17f28f838"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""3cf09662-2be3-4830-93a7-2dd07faf48b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -312,6 +330,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SwordAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""513d8bb1-3a61-4be3-85cd-516c4c6d56a0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a8efa47-64e2-483a-be2a-9c466551de90"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -327,6 +367,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_B = m_PlayerActions.FindAction("B", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_SwordAttack = m_PlayerActions.FindAction("SwordAttack", throwIfNotFound: true);
+        m_PlayerActions_Interact = m_PlayerActions.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerActions_Escape = m_PlayerActions.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -445,6 +487,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_B;
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_SwordAttack;
+    private readonly InputAction m_PlayerActions_Interact;
+    private readonly InputAction m_PlayerActions_Escape;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -452,6 +496,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @B => m_Wrapper.m_PlayerActions_B;
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @SwordAttack => m_Wrapper.m_PlayerActions_SwordAttack;
+        public InputAction @Interact => m_Wrapper.m_PlayerActions_Interact;
+        public InputAction @Escape => m_Wrapper.m_PlayerActions_Escape;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -470,6 +516,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwordAttack.started += instance.OnSwordAttack;
             @SwordAttack.performed += instance.OnSwordAttack;
             @SwordAttack.canceled += instance.OnSwordAttack;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -483,6 +535,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwordAttack.started -= instance.OnSwordAttack;
             @SwordAttack.performed -= instance.OnSwordAttack;
             @SwordAttack.canceled -= instance.OnSwordAttack;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -510,5 +568,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnB(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSwordAttack(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

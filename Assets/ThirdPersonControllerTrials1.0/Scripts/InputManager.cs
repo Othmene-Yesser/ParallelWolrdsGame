@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
     AnimatorManager animatorManager;
+    EscapeMenuManager ui;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -21,11 +22,14 @@ public class InputManager : MonoBehaviour
     public bool b_Input; //sprinting
     public bool jump_Input;
     public bool b_Attack;
+    public bool b_Interact;
+    public bool b_Escape;
 
     private void Awake()
     {
         animatorManager= GetComponent<AnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        ui = GetComponent<EscapeMenuManager>();
     }
 
     private void OnEnable()
@@ -45,6 +49,11 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Jump.performed += i => jump_Input = true;
             //read if we clicked left mouse button for the attack
             playerControls.PlayerActions.SwordAttack.performed += i => b_Attack = true;
+            //read if we clicked the button e to interact
+            playerControls.PlayerActions.Interact.performed += i => b_Interact = true;
+            playerControls.PlayerActions.Interact.canceled += i => b_Interact = false;
+            //read if we clicked escape
+            playerControls.PlayerActions.Escape.performed += i => b_Escape = true;
         }
 
         playerControls.Enable();
@@ -62,6 +71,7 @@ public class InputManager : MonoBehaviour
         HandleJumpingInput();
         //handle action input
         HandleAttackingInput();
+        HandleUi();
     }
 
     private void HandleMovementInput()
@@ -104,6 +114,15 @@ public class InputManager : MonoBehaviour
             b_Attack = false;
             //! Attack
             playerLocomotion.HandleAttacking();
+        }
+    }
+    private void HandleUi()
+    {
+        if (b_Escape)
+        {
+            b_Escape = false;
+            //! Enable Escape Menu
+            ui.EscapeMenu();
         }
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class SaveManager
 {
-    static readonly string True = "true";
-    static readonly string False = "false";
+    public static readonly string True = "true";
+    public static readonly string False = "false";
     static readonly string PlayerPositionX = "PlayerPositionX";
     static readonly string PlayerPositionY = "PlayerPositionY";
     static readonly string PlayerPositionZ = "PlayerPositionZ";
@@ -17,6 +17,7 @@ public static class SaveManager
     static readonly string PlayerDimension = "PlayerDimension";
     static readonly string BeatenBossInAgility = "AgilityBoss";
     static readonly string BeatenBossInBizarre = "BizarreBoss";
+    static readonly string LoadData = "LoadData";//! we use this variable so that we check either to load the data or no
 
     public static void SavePlayerPrefs(PlayerData playerData)
     {
@@ -50,6 +51,7 @@ public static class SaveManager
     {
         PlayerPrefs.SetString(BeatenBossInAgility, False);
         PlayerPrefs.SetString(BeatenBossInBizarre, False);
+        PlayerPrefs.SetString(LoadData, False);
         PlayerPrefs.Save();
     }
     public static void BeatAgilityBoss()
@@ -61,6 +63,23 @@ public static class SaveManager
     {
         PlayerPrefs.SetString(BeatenBossInBizarre, True);
         PlayerPrefs.Save();
+    }
+    public static void Continue()
+    {
+        PlayerPrefs.SetString(LoadData, True);
+        PlayerPrefs.Save();
+    }
+    public static bool CheckIfBeatenBothBosses()
+    {
+        if (PlayerPrefs.GetString(BeatenBossInAgility) == False)
+        {
+            return false;
+        }
+        else if (PlayerPrefs.GetString(BeatenBossInBizarre) == False)
+        {
+            return false;
+        }
+        return true;
     }
 }
 

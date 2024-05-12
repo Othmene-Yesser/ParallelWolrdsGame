@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        health = 12.5f;
+        health = 100f;
         importance = Random.Range(1f, 4f);
     }
     private void Death()

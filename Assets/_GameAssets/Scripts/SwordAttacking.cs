@@ -26,7 +26,7 @@ public class SwordAttacking : MonoBehaviour
     {
         var direction = enemy.transform.position - playerManager.transform.position;
         direction.Normalize();
-        enemyRigidbody.AddForce(direction * 110);
+        enemyRigidbody.AddForce(direction * 50, ForceMode.Impulse);
     }
 }
 

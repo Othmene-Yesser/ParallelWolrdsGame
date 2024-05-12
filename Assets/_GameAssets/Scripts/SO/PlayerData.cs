@@ -15,6 +15,6 @@ public class PlayerData : ScriptableObject
     public float Speed = 3f;
     public float Damage = 12.5f;
     [Header("Postion")]
-    public int Dimension = 0;
+    public int Dimension = 1;
     public Vector3 Position;
 }
