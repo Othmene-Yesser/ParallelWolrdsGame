@@ -38551,7 +38551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 195294175}
-  referencedWorld: 2
+  referencedWorld: 1
 --- !u!135 &989505544378100443
 SphereCollider:
   m_ObjectHideFlags: 0
